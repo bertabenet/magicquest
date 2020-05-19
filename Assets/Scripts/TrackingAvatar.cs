@@ -83,20 +83,26 @@ public class TrackingAvatar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // add the new pose in this frame in the vector of means
         foreach(string part in bodyParts)
         {
             mean_pose[part][0] = pose[part];
         }
 
+        // if the frame is not one of the first ones do the following:
         if (Time.frameCount > mean_size)
         {
+            // counter to keep track of the body part object we are working on
             int count = 0;
+            // do the same piece of code for all the body parts
             foreach (string part in bodyParts)
             {
+                // compute the mean position with the current one and the ones before
                 Vector3 total_pose = new Vector3();
                 float ponderations = 0.0f;
                 for (int i = 0; i < mean_size; i++)
                 {
+                    // compute ponderations
                     float pond = (1 / Mathf.Pow(2.0f, (float)(i + 1)));
                     if (i == mean_size - 1)
                     {
@@ -106,6 +112,7 @@ public class TrackingAvatar : MonoBehaviour
                     total_pose += mean_pose[part][i] * pond;
                 }
 
+                // transform the object's position according to the mean
                 bodyParts_object[count].transform.position = total_pose;
                 count += 1;
             }
@@ -120,6 +127,7 @@ public class TrackingAvatar : MonoBehaviour
             }
         }
 
+        // update the mean vector
         for (int i = 1; i < mean_size; i++)
         {
             foreach(string part in bodyParts)
