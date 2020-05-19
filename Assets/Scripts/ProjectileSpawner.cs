@@ -47,7 +47,7 @@ public class ProjectileSpawner : MonoBehaviour
         print(randomPosition);
         print(SpawnPositions.Count);
         
-        diam.GetComponent<MoveDiamond>().SetSpawner(this);
+        //diam.GetComponent<MoveDiamond>().SetSpawner(this);
 
     }
     private IEnumerator SpawnRoutine()
