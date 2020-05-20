@@ -141,7 +141,7 @@ public class TrackingAvatar : MonoBehaviour
     protected void MessageReceived(OSCMessage message)
     {
         List<OSCValue> list = message.Values;
-        UnityEngine.Debug.Log(list.Count);
+        // UnityEngine.Debug.Log(list.Count);
 
         for (int i = 0; i < list.Count; i += 3)
         {

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Proj
+  - Destroy
+  - Diamond
+  - Rock
+  - Hand
+  - Head
   layers:
   - Default
   - TransparentFX

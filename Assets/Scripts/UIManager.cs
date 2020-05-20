@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-
+    /*
     public Text diamondsCollectedText;
     public Text hitsTakenText;
     public GameObject gameOverWindow;
-
+    */
 
     // Start is called before the first frame update
     void Awake()
@@ -20,16 +20,16 @@ public class UIManager : MonoBehaviour
 
     public void UpdateDiamondsCollected()
     {
-        diamondsCollectedText.text = GameStateManager.Instance.diamondsCollected.ToString();
+        //diamondsCollectedText.text = GameManager.Instance.diamondsCollected.ToString();
     }
 
     public void UpdateHitsTaken()
     {
-        hitsTakenText.text = GameStateManager.Instance.livesLeft.ToString();
+        //hitsTakenText.text = GameManager.Instance.livesLeft.ToString();
     }
     public void ShowGameOverWindow()
     {
-        gameOverWindow.SetActive(true);
+        //gameOverWindow.SetActive(true);
     }
 
 
