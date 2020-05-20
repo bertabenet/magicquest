@@ -1,4 +1,7 @@
-# PoseNetOSC-Unity
+# Final Project
+Authors: Cesc Bausà / Berta Benet / Maria Elena Budan 
+_______________________________
+## PoseNetOSC-Unity
 
 This project is based on these other projects: 
 
