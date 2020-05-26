@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     private Vector3 RandomDirection()
 
     {
-        return new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(0.0f, -1.0f), 0);
+        return new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.5f, -1.0f), 0);
 
     }
 
@@ -55,9 +55,14 @@ public class Movement : MonoBehaviour
         if (gameObject.CompareTag("Diamond")) {
             if (other.CompareTag("Hand") && !hasCollided)
             {
-                print("diamond hit by hand");
                 hasCollided = true;
                 CollectDiamond();
+            }
+
+            if (other.CompareTag("Head") && !hasCollided)
+            {
+                hasCollided = true;
+                LoseDiamond();
             }
         }
 
@@ -65,9 +70,14 @@ public class Movement : MonoBehaviour
         {
             if (other.CompareTag("Head") && !hasCollided)
             {
-                print("rock hit by head");
                 hasCollided = true;
-                HitByRock();
+                LoseLive();
+            }
+
+            if (other.CompareTag("Hand") && !hasCollided)
+            {
+                hasCollided = true;
+                LoseDiamond();
             }
         }
     }
@@ -77,15 +87,23 @@ public class Movement : MonoBehaviour
         runSpeed = 0;
         Destroy(gameObject, destroyDelay);
         spawner.RemoveDiamFromList(gameObject);
-        GameManager.Instance.collectDiamonds();
+        GameManager.Instance.collectDiamond();
     }
 
-    private void HitByRock()
+    private void LoseLive()
     {
         runSpeed = 0;
         Destroy(gameObject, destroyDelay);
         spawner.RemoveProjFromList(gameObject);
         GameManager.Instance.lessLife();
 
+    }
+
+    private void LoseDiamond()
+    {
+        runSpeed = 0;
+        Destroy(gameObject, destroyDelay);
+        spawner.RemoveDiamFromList(gameObject);
+        GameManager.Instance.loseDiamond();
     }
 }

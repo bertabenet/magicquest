@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int diamondsCollected;
     [HideInInspector]
-    public int livesLeft;
+    public int livesLost;
 
     public Spawner spawner;
 
@@ -32,20 +32,31 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void collectDiamonds()
+    public void collectDiamond()
     {
         diamondsCollected += 1;
-        UIManager.Instance.UpdateDiamondsCollected();
+        UIManager.Instance.UpdateDiamondsCollected(true);
+        if (diamondsCollected == diamondsToWin)
+        {
+            GameOver();
+        }
     }
 
     public void lessLife()
     {
-        livesLeft += 1;
+        livesLost += 1;
         UIManager.Instance.UpdateHitsTaken();
-        if (livesLeft == hitsBeforeGameOver)
+        if (livesLost == hitsBeforeGameOver)
         {
             GameOver();
         }
+    }
+
+    public void loseDiamond()
+    {
+        if (diamondsCollected > 0)
+            diamondsCollected -= 1;
+        UIManager.Instance.UpdateDiamondsCollected(false);
     }
 
     private void GameOver()
