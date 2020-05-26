@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         hasCollided = false;
         direction = RandomDirection();
-        InvokeRepeating("increaseSpeed", 0.3f, 1f);
+        //InvokeRepeating("increaseSpeed", 0.3f, 1f);
     }
     // Update is called once per frame
     void Update()
