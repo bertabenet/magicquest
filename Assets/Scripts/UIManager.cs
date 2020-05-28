@@ -96,7 +96,6 @@ public class UIManager : MonoBehaviour
                     break;
                 case 2:
                     D3.GetComponent<ColorRenderer>().InactiveColor();
-                    // FER "YOU WIN" o algo aixi
                     break;
             }
         }
@@ -120,4 +119,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void YouWin()
+    {
+        Debug.Log("YOU WIN");
+    }
+
+    public void YouLose()
+    {
+        Debug.Log("YOU LOST");
+    }
 }

@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         if (diamondsCollected == diamondsToWin)
         {
             GameOver();
+            UIManager.Instance.YouWin();
         }
     }
 
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         if (livesLost == hitsBeforeGameOver)
         {
             GameOver();
+            UIManager.Instance.YouLose();
         }
     }
 
@@ -63,7 +65,6 @@ public class GameManager : MonoBehaviour
     {
         spawner.canSpawn = false;
         spawner.DestroyAllObjects();
-        //gameOver.text = "GAME OVER";
 
     }
 }
