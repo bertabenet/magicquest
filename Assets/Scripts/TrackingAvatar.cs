@@ -13,6 +13,8 @@ public class TrackingAvatar : MonoBehaviour
     public GameObject ankleR;
     public GameObject ankleL;
 
+    public GameObject original;
+
     public int mean_size;
 
     //OSC Variables
@@ -113,7 +115,7 @@ public class TrackingAvatar : MonoBehaviour
                 }
 
                 // transform the object's position according to the mean
-                bodyParts_object[count].transform.position = total_pose;
+                bodyParts_object[count].transform.localPosition = total_pose;
                 count += 1;
             }
         }
@@ -150,8 +152,10 @@ public class TrackingAvatar : MonoBehaviour
 
             OSCValue val0 = list.ElementAt(i);
             if (val0.Type == OSCValueType.String) key = val0.StringValue;
+
             OSCValue val1 = list.ElementAt(i + 1);
             if (val1.Type == OSCValueType.Float) position.x = val1.FloatValue - 250;
+
             OSCValue val2 = list.ElementAt(i + 2);
             if (val2.Type == OSCValueType.Float) position.y = -(val2.FloatValue - 250);
 
