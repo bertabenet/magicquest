@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FlyCameraBehaviour : MonoBehaviour
 {
-
+    /*
     public float cameraSensitivity = 90;
     public float climbSpeed = 4;
     public float normalMoveSpeed = 10;
@@ -52,4 +52,5 @@ public class FlyCameraBehaviour : MonoBehaviour
             Screen.lockCursor = (Screen.lockCursor == false) ? true : false;
         }
     }
+    */
 }

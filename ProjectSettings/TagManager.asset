@@ -10,6 +10,8 @@ TagManager:
   - Rock
   - Hand
   - Head
+  - Foot
+  - BodyPart
   layers:
   - Default
   - TransparentFX
