@@ -6,8 +6,9 @@ public class GameManagerMountain : MonoBehaviour
 {
     public static GameManagerMountain Instance;
    
+    public List<GameObject> level0 = new List<GameObject>();                    // rocks in level 0
     public List<GameObject> level1 = new List<GameObject>();                    // rocks in level 1
-
+    public List<GameObject> level2 = new List<GameObject>();                    // rocks in level 2
 
     private int general_counter;                                                // increase once a level is complete
     private List<List<GameObject>> levels = new List<List<GameObject>>();       // keep track of all the levels' gameobjects
@@ -26,7 +27,9 @@ public class GameManagerMountain : MonoBehaviour
 
     private void Start()
     {
+        levels.Add(level0);
         levels.Add(level1);
+        levels.Add(level2);
         for (int i = 0; i < levels.Count; i++)
         {
             level_counter.Add(0);
@@ -38,6 +41,9 @@ public class GameManagerMountain : MonoBehaviour
     {
         if (movement)
         {
+            Debug.Log("Level = " + general_counter);
+            Debug.Log("New center = " + centers[general_counter].transform.position.y);
+
             landscape.transform.Translate(Vector3.down * Time.deltaTime * speed);
 
             if(landscape.transform.position.y < centers[general_counter].transform.position.y)
@@ -84,12 +90,7 @@ public class GameManagerMountain : MonoBehaviour
         {
             rock.GetComponent<Collider>().enabled = false;
         }
-        /*
-        foreach (GameObject rock in levels[general_counter])
-        {
-            rock.GetComponent<Collider>().enabled = true;
-        }
-        */
+        
         MoveLandscape();
     }
 
