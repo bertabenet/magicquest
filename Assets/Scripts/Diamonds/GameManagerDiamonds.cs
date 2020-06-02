@@ -36,6 +36,7 @@ public class GameManagerDiamonds : MonoBehaviour
     {
         diamondsCollected += 1;
         UIManagerDiamonds.Instance.UpdateDiamondsCollected(true);
+        AudioManagerDiamonds.Instance.PlayPickDiamondClip();
         if (diamondsCollected == diamondsToWin)
         {
             GameOver();
@@ -47,6 +48,7 @@ public class GameManagerDiamonds : MonoBehaviour
     {
         livesLost += 1;
         UIManagerDiamonds.Instance.UpdateHitsTaken();
+        AudioManagerDiamonds.Instance.PlayHitByRockClip();
         if (livesLost == hitsBeforeGameOver)
         {
             GameOver();
@@ -57,7 +59,10 @@ public class GameManagerDiamonds : MonoBehaviour
     public void loseDiamond()
     {
         if (diamondsCollected > 0)
+        {
             diamondsCollected -= 1;
+            AudioManagerDiamonds.Instance.PlayLoseDiamondClip();
+        }
         UIManagerDiamonds.Instance.UpdateDiamondsCollected(false);
     }
 

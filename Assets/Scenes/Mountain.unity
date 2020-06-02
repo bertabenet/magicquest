@@ -1037,13 +1037,13 @@ MonoBehaviour:
   - {fileID: 386803363}
   - {fileID: 1169142944}
   - {fileID: 1799189364}
-  landscape: {fileID: 1671012526}
   centers:
   - {fileID: 1121795822}
   - {fileID: 2039927511}
   - {fileID: 1751209155}
   - {fileID: 1570063233}
   speed: 100
+  landscape: {fileID: 1671012526}
 --- !u!1001 &677562815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3364,7 +3364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751209155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -950, z: 0}
+  m_LocalPosition: {x: 0, y: -1000, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1722599737}
@@ -3732,7 +3732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041376523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1865780980}

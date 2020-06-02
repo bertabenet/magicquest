@@ -14,9 +14,9 @@ public class GameManagerMountain : MonoBehaviour
     private List<List<GameObject>> levels = new List<List<GameObject>>();       // keep track of all the levels' gameobjects
     private List<int> level_counter = new List<int>();                          // keep track of correct handles in each level
 
-    public GameObject landscape;                                                // landscape object
     public List<GameObject> centers = new List<GameObject>();                   // center for each level on the landscape
     public int speed;                                                           // speed to move the landscape
+    public GameObject landscape;                                                // landscape object
     private bool movement;                                                      // move landscape
 
 
@@ -40,10 +40,7 @@ public class GameManagerMountain : MonoBehaviour
     private void Update()
     {
         if (movement)
-        {
-            Debug.Log("Level = " + general_counter);
-            Debug.Log("New center = " + centers[general_counter].transform.position.y);
-
+        { 
             landscape.transform.Translate(Vector3.down * Time.deltaTime * speed);
 
             if(landscape.transform.position.y < centers[general_counter].transform.position.y)
@@ -85,7 +82,6 @@ public class GameManagerMountain : MonoBehaviour
 
     private void StartNextLevel(int general_counter)
     {
-        Debug.Log("NEXT LEVEL!!");
         foreach(GameObject rock in levels[general_counter - 1])
         {
             rock.GetComponent<Collider>().enabled = false;
@@ -96,8 +92,12 @@ public class GameManagerMountain : MonoBehaviour
 
     private void MoveLandscape()
     {
-        Debug.Log("START MOVING");
         movement = true;
+    }
+
+    public int GetLevelCounter(int level)
+    {
+        return level_counter[level];
     }
 
     private void GameOver()

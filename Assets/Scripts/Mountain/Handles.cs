@@ -9,17 +9,13 @@ public class Handles : MonoBehaviour
     public Material deactivateColor;
     public int level;
 
-    void Start()
-    {
-       // deactivateColor = gameObject.GetComponent<Renderer>().material;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("BodyPart"))
         {
             gameObject.GetComponent<Renderer>().material.color = activateColor.color;
             GameManagerMountain.Instance.IncreaseLevelCounter(level);
+            Debug.Log("COUNTER INCREASED: Level = " + level + ", Counter = " + GameManagerMountain.Instance.GetLevelCounter(level));
 
         }
     }
@@ -30,6 +26,7 @@ public class Handles : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material.color = deactivateColor.color;
             GameManagerMountain.Instance.DecreaseLevelCounter(level);
+            Debug.Log("COUNTER DECREASED: Level = " + level + ", Counter = " + GameManagerMountain.Instance.GetLevelCounter(level));
         }
 
     }
