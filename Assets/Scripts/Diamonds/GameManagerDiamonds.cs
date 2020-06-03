@@ -39,8 +39,8 @@ public class GameManagerDiamonds : MonoBehaviour
         AudioManagerDiamonds.Instance.PlayPickDiamondClip();
         if (diamondsCollected == diamondsToWin)
         {
-            GameOver();
             UIManagerDiamonds.Instance.YouWin();
+            GameOver(true);
         }
     }
 
@@ -51,8 +51,8 @@ public class GameManagerDiamonds : MonoBehaviour
         AudioManagerDiamonds.Instance.PlayHitByRockClip();
         if (livesLost == hitsBeforeGameOver)
         {
-            GameOver();
             UIManagerDiamonds.Instance.YouLose();
+            GameOver(false);
         }
     }
 
@@ -61,15 +61,28 @@ public class GameManagerDiamonds : MonoBehaviour
         if (diamondsCollected > 0)
         {
             diamondsCollected -= 1;
-            AudioManagerDiamonds.Instance.PlayLoseDiamondClip();
         }
+        AudioManagerDiamonds.Instance.PlayLoseDiamondClip();
         UIManagerDiamonds.Instance.UpdateDiamondsCollected(false);
     }
 
-    private void GameOver()
+    private void GameOver(bool win)
     {
         spawner.canSpawn = false;
         spawner.DestroyAllObjects();
 
+        string scene;
+        if (win) scene = "Instructions_Mountain";
+        else scene = "Instructions_Diamonds";
+
+        StartCoroutine(ChangeSceneRoutine(scene, 4.0f));
+
+    }
+
+    private IEnumerator ChangeSceneRoutine(string scene, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        SceneManager.LoadScene(scene);
+        
     }
 }

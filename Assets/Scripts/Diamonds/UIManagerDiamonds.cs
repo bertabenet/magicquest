@@ -18,6 +18,9 @@ public class UIManagerDiamonds : MonoBehaviour
     private int hearts;
     private int diamonds;
 
+    public GameObject winText;
+    public GameObject loseText;
+
 
     /*
     public Text diamondsCollectedText;
@@ -27,6 +30,8 @@ public class UIManagerDiamonds : MonoBehaviour
 
     private void Start()
     {
+        winText.SetActive(false);
+        loseText.SetActive(false);
         D1.GetComponent<ColorRenderer>().InactiveColor();
         D2.GetComponent<ColorRenderer>().InactiveColor();
         D3.GetComponent<ColorRenderer>().InactiveColor();
@@ -121,11 +126,11 @@ public class UIManagerDiamonds : MonoBehaviour
 
     public void YouWin()
     {
-        Debug.Log("YOU WIN");
+        winText.SetActive(true);
     }
 
     public void YouLose()
     {
-        Debug.Log("YOU LOST");
+        loseText.SetActive(true);
     }
 }
