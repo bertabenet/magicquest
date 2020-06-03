@@ -63,10 +63,11 @@ public class GameManagerMountain : MonoBehaviour
      */
     public void IncreaseLevelCounter(int level)
     {
-
         level_counter[level]++;
+        Debug.Log("(INCREASE) level_counter[" + level + "] = " + level_counter[level]);
         if (level_counter[level] == levels[level].Count)
         {
+            Debug.Log("levels[" + level + "].Count = " + levels[level].Count);
             IncreaseGeneralCounter();
             StartNextLevel(general_counter);
         }
@@ -78,6 +79,7 @@ public class GameManagerMountain : MonoBehaviour
     public void DecreaseLevelCounter(int level)
     {
         level_counter[level]--;
+        Debug.Log("(DECREASE) level_counter[" + level + "] = " + level_counter[level]);
     }
 
     private void StartNextLevel(int general_counter)
@@ -100,7 +102,7 @@ public class GameManagerMountain : MonoBehaviour
         return level_counter[level];
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         //UIManager.Instance.SetGameOverText();
 
