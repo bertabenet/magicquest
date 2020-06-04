@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameManagerMountain : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class GameManagerMountain : MonoBehaviour
     public GameObject landscape;                                                // landscape object
     private bool movement;                                                      // move landscape
 
+    public GameObject winText;
 
     private void Awake()
     {
@@ -27,26 +30,26 @@ public class GameManagerMountain : MonoBehaviour
 
     private void Start()
     {
+        // Add each level lists to general list "levels"
         levels.Add(level0);
         levels.Add(level1);
         levels.Add(level2);
+
+        // Init level_counter to 0
         for (int i = 0; i < levels.Count; i++)
         {
             level_counter.Add(0);
         }
+
         movement = false;
+
+        winText.SetActive(false);
     }
 
     private void Update()
     {
-        if (movement)
-        { 
-            landscape.transform.Translate(Vector3.down * Time.deltaTime * speed);
-
-            if(landscape.transform.position.y < centers[general_counter].transform.position.y)
-                movement = false;
-            
-        }
+        // move to next level when movement is true
+        if (movement) MoveLandscape();
     }
 
 
@@ -64,10 +67,9 @@ public class GameManagerMountain : MonoBehaviour
     public void IncreaseLevelCounter(int level)
     {
         level_counter[level]++;
-        Debug.Log("(INCREASE) level_counter[" + level + "] = " + level_counter[level]);
         if (level_counter[level] == levels[level].Count)
         {
-            Debug.Log("levels[" + level + "].Count = " + levels[level].Count);
+            SetAllActive(level);
             IncreaseGeneralCounter();
             StartNextLevel(general_counter);
         }
@@ -79,45 +81,59 @@ public class GameManagerMountain : MonoBehaviour
     public void DecreaseLevelCounter(int level)
     {
         level_counter[level]--;
-        Debug.Log("(DECREASE) level_counter[" + level + "] = " + level_counter[level]);
     }
 
+    /*
+     * Disable handles' collider for the actual level and
+     * move landscape to next level
+     */
     private void StartNextLevel(int general_counter)
     {
         foreach(GameObject rock in levels[general_counter - 1])
         {
             rock.GetComponent<Collider>().enabled = false;
         }
-        
-        MoveLandscape();
-    }
 
-    private void MoveLandscape()
-    {
         movement = true;
     }
 
-    public int GetLevelCounter(int level)
+
+    /*
+     * Move landscape to next level
+     */
+    private void MoveLandscape()
     {
-        return level_counter[level];
+        landscape.transform.Translate(Vector3.down * Time.deltaTime * speed);
+
+        if (landscape.transform.position.y < centers[general_counter].transform.position.y)
+            movement = false;
     }
 
+    /*
+     * Ensure handles of given level are activated. 
+     */
+    private void SetAllActive(int level)
+    {
+        foreach (GameObject rock in levels[level])
+        {
+            rock.GetComponent<Handles>().ActivateColor();
+        }
+    }
+
+    /*
+     * Display "You win" text and load next scene
+     */
     public void GameOver()
     {
-        //UIManager.Instance.SetGameOverText();
+        winText.SetActive(true);
+        StartCoroutine(ChangeSceneRoutine("Play_Again", 4.0f));
 
-        /*
-        // stop collider
-        positionWristL.GetComponent<Collider>().enabled = false;
-        positionWristR.GetComponent<Collider>().enabled = false;
-        positionAnkleL.GetComponent<Collider>().enabled = false;
-        positionAnkleR.GetComponent<Collider>().enabled = false;
+    }
 
-        // set color to gray forever
-        positionWristL.GetComponent<MeshRenderer>().material.color = Color.gray;
-        positionWristR.GetComponent<MeshRenderer>().material.color = Color.gray;
-        positionAnkleL.GetComponent<MeshRenderer>().material.color = Color.gray;
-        positionAnkleR.GetComponent<MeshRenderer>().material.color = Color.gray;
-        */
+    private IEnumerator ChangeSceneRoutine(string scene, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        SceneManager.LoadScene(scene);
+
     }
 }

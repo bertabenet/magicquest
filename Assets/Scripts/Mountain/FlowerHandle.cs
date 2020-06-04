@@ -19,17 +19,17 @@ public class FlowerHandle : MonoBehaviour
             gameObject.transform.Translate(Vector3.up * Time.deltaTime * speed);
 
             if (gameObject.transform.localPosition.y > 98.0f)
+            {
                 goUp = false;
+                GameManagerMountain.Instance.GameOver();
+            }
+
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Head"))
-        {
-            goUp = true;
-            GameManagerMountain.Instance.GameOver();
-        }
+        if (other.CompareTag("Head")) goUp = true;
     }
 
 }

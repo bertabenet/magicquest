@@ -28,4 +28,9 @@ public class Handles : MonoBehaviour
         }
 
     }
+
+    public void ActivateColor()
+    {
+        gameObject.GetComponent<Renderer>().material.color = activateColor.color;
+    }
 }

@@ -13,8 +13,6 @@ public class TrackingAvatar : MonoBehaviour
     public GameObject ankleR;
     public GameObject ankleL;
 
-    public GameObject original;
-
     public int mean_size;
 
     //OSC Variables

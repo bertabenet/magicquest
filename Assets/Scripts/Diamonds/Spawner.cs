@@ -21,8 +21,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnDiamondRoutine());
-        StartCoroutine(SpawnProjectileRoutine());
+        Invoke("StartSpawn", 3.0f);
     }
 
     // Update is called once per frame
@@ -58,6 +57,12 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    private void StartSpawn()
+    {
+        StartCoroutine(SpawnDiamondRoutine());
+        StartCoroutine(SpawnProjectileRoutine());
+    }
+
     private IEnumerator SpawnProjectileRoutine()
     {
         while (canSpawn)
@@ -71,6 +76,7 @@ public class Spawner : MonoBehaviour
     {
         projList.Remove(proj);
     }
+
     public void RemoveDiamFromList(GameObject diam)
     {
         diamList.Remove(diam);
