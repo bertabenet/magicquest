@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameManagerMountain : MonoBehaviour
@@ -22,6 +23,12 @@ public class GameManagerMountain : MonoBehaviour
     private bool movement;                                                      // move landscape
 
     public GameObject winText;
+    public RawImage fade;
+    private Color textColor;
+    private bool fadeIn;
+    private bool fadeOut;
+    public float fadeTextSpeed;
+    public float fadeOutSpeed;
 
     private void Awake()
     {
@@ -30,6 +37,10 @@ public class GameManagerMountain : MonoBehaviour
 
     private void Start()
     {
+        textColor = winText.GetComponent<Text>().color;
+        fadeIn = false;
+        fadeOut = false;
+
         // Add each level lists to general list "levels"
         levels.Add(level0);
         levels.Add(level1);
@@ -43,13 +54,20 @@ public class GameManagerMountain : MonoBehaviour
 
         movement = false;
 
-        winText.SetActive(false);
+        winText.GetComponent<Text>().color = new Color(textColor.r, textColor.g, textColor.b, 0.0f);
+        fade.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
     }
 
     private void Update()
     {
         // move to next level when movement is true
         if (movement) MoveLandscape();
+
+        if (fadeIn)
+            winText.GetComponent<Text>().color += new Color(0, 0, 0, fadeTextSpeed);
+
+        if (fadeOut)
+            fade.color += new Color(0, 0, 0, fadeOutSpeed);
     }
 
 
@@ -125,8 +143,8 @@ public class GameManagerMountain : MonoBehaviour
      */
     public void GameOver()
     {
-        winText.SetActive(true);
-        StartCoroutine(ChangeSceneRoutine("Play_Again", 4.0f));
+        fadeOut = true;
+        StartCoroutine(ChangeSceneRoutine("Play_Again", 3.0f));
 
     }
 
@@ -135,5 +153,10 @@ public class GameManagerMountain : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         SceneManager.LoadScene(scene);
 
+    }
+
+    public void ShowWinningText()
+    {
+        fadeIn = true;
     }
 }

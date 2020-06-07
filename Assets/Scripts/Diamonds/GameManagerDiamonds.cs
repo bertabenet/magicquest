@@ -17,19 +17,34 @@ public class GameManagerDiamonds : MonoBehaviour
 
     public int hitsBeforeGameOver;
     public int diamondsToWin;
-    // public Text gameOver;
+
+    public RawImage fade;
+    public float fadeSpeed;
+    private bool fadeIn;
+    private bool fadeOut;
 
     // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
-        //gameOver.text = "";
+    }
+
+    private void Start()
+    {
+        fade.color = Color.black;
+        fadeIn = true;
+        fadeOut = false;
+        StartCoroutine(StopFadeIn(3.0f));
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (fadeIn)
+            fade.color -= new Color(0, 0, 0, fadeSpeed);
 
+        if (fadeOut)
+            fade.color += new Color(0, 0, 0, fadeSpeed);
     }
 
     public void collectDiamond()
@@ -75,7 +90,9 @@ public class GameManagerDiamonds : MonoBehaviour
         if (win) scene = "Instructions_Mountain";
         else scene = "Instructions_Diamonds";
 
-        StartCoroutine(ChangeSceneRoutine(scene, 4.0f));
+        //fadeIn = false;
+        fadeOut = true;
+        StartCoroutine(ChangeSceneRoutine(scene, 3.0f));
 
     }
 
@@ -85,4 +102,11 @@ public class GameManagerDiamonds : MonoBehaviour
         SceneManager.LoadScene(scene);
         
     }
+
+    private IEnumerator StopFadeIn(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        fadeIn = false;
+    }
+
 }

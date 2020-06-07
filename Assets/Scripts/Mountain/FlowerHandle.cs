@@ -18,6 +18,9 @@ public class FlowerHandle : MonoBehaviour
         {
             gameObject.transform.Translate(Vector3.up * Time.deltaTime * speed);
 
+            if (gameObject.transform.localPosition.y > 96.0f)
+                GameManagerMountain.Instance.ShowWinningText();
+
             if (gameObject.transform.localPosition.y > 98.0f)
             {
                 goUp = false;
