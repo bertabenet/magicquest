@@ -12,6 +12,8 @@ TagManager:
   - Head
   - Foot
   - BodyPart
+  - HandR
+  - HandL
   layers:
   - Default
   - TransparentFX

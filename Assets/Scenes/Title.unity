@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 859460}
-  fadeOut: {fileID: 92548388}
+  fade: {fileID: 92548388}
   speed: 5
   increaseAlphaSpeed: 0.008
   fadeOutSpeed: 0.05

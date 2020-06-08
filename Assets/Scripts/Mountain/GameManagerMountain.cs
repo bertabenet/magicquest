@@ -30,6 +30,14 @@ public class GameManagerMountain : MonoBehaviour
     public float fadeTextSpeed;
     public float fadeOutSpeed;
 
+    public Text timerText;
+    public float minutesLeft;
+
+    private bool restart;
+    public int fallingSpeed;
+
+    public GameObject gameOverText;
+
     private void Awake()
     {
         Instance = this;
@@ -40,6 +48,8 @@ public class GameManagerMountain : MonoBehaviour
         textColor = winText.GetComponent<Text>().color;
         fadeIn = false;
         fadeOut = false;
+        minutesLeft *= 60;
+        gameOverText.SetActive(false);
 
         // Add each level lists to general list "levels"
         levels.Add(level0);
@@ -62,12 +72,30 @@ public class GameManagerMountain : MonoBehaviour
     {
         // move to next level when movement is true
         if (movement) MoveLandscape();
+        if (restart) FallDown();
 
         if (fadeIn)
             winText.GetComponent<Text>().color += new Color(0, 0, 0, fadeTextSpeed);
 
         if (fadeOut)
             fade.color += new Color(0, 0, 0, fadeOutSpeed);
+
+        if (minutesLeft > 0.0 & !fadeOut)
+        {
+            minutesLeft -= Time.deltaTime;
+            int min = Mathf.FloorToInt(minutesLeft / 60);
+            int sec = Mathf.FloorToInt(minutesLeft % 60);
+
+            timerText.text = min.ToString("00") + ":" + sec.ToString("00");
+        }
+
+        if (minutesLeft <= 0.0f)
+        {
+            timerText.text = "00:00";
+            gameOverText.SetActive(true);
+            FallDown();
+        }
+            
     }
 
 
@@ -158,5 +186,17 @@ public class GameManagerMountain : MonoBehaviour
     public void ShowWinningText()
     {
         fadeIn = true;
+    }
+
+    private void FallDown()
+    {
+        landscape.transform.Translate(Vector3.up * Time.deltaTime * fallingSpeed);
+
+        if (landscape.transform.position.y > centers[0].transform.position.y)
+        {
+            restart = false;
+            SceneManager.LoadScene("Mountain");
+        }
+            
     }
 }

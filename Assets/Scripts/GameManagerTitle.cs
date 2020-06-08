@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManagerTitle : MonoBehaviour
 {
     private bool arrivedFadeOutPosition;
+    private bool fadeIn;
 
     public Text title;
-    public RawImage fadeOut;
+    public RawImage fade;
 
     public float speed;
     public float increaseAlphaSpeed;
@@ -21,16 +22,9 @@ public class GameManagerTitle : MonoBehaviour
     void Start()
     {
         arrivedFadeOutPosition = false;
+        fadeIn = true;
         title.color = new Color(title.color.r, title.color.g, title.color.b, 0.0f);
-        fadeOut.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        /*
-         * 1- TITLE
-         * 2- Instructions Diamonds
-         * 3- Diamonds
-         * 4- Instructions Mountain
-         * 5- Mountain
-         * 6- Tornar a jugar / sortir
-         */
+        fade.color = Color.black;
     }
 
     // Update is called once per frame
@@ -47,10 +41,16 @@ public class GameManagerTitle : MonoBehaviour
 
         if (arrivedFadeOutPosition)
         {
-            fadeOut.color += new Color(0, 0, 0, fadeOutSpeed);
-            if (fadeOut.color.a >= 2)
+            fade.color += new Color(0, 0, 0, fadeOutSpeed);
+            if (fade.color.a >= 2)
                 SceneManager.LoadScene("Instructions_Diamonds");
         }
+
+        if (fadeIn)
+            fade.color -= new Color(0, 0, 0, fadeOutSpeed);
+
+        if (fade.color.a <= 0.0f)
+            fadeIn = false;
 
     }
 }
