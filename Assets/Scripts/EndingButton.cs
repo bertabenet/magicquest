@@ -8,9 +8,9 @@ public class EndingButton : MonoBehaviour
     public float fadingSpeed;
     public bool end;
 
-    private bool handR;
-    private bool handL;
-    private bool head;
+    public bool handR;
+    public bool handL;
+    public bool head;
 
     private Color initColor;
 

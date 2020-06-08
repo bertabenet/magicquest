@@ -18,6 +18,7 @@ public class GameManagerTitle : MonoBehaviour
     public int fadeOutPoint;
     public int endPoint;
 
+
     // Start is called before the first frame update
     void Start()
     {
