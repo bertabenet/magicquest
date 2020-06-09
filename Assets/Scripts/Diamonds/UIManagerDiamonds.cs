@@ -21,13 +21,6 @@ public class UIManagerDiamonds : MonoBehaviour
     public GameObject winText;
     public GameObject loseText;
 
-
-    /*
-    public Text diamondsCollectedText;
-    public Text hitsTakenText;
-    public GameObject gameOverWindow;
-    */
-
     private void Start()
     {
         winText.SetActive(false);
@@ -41,17 +34,10 @@ public class UIManagerDiamonds : MonoBehaviour
         H3.GetComponent<ColorRenderer>().ActiveColor();
     }
 
-    // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
     }
-
-    private void Update()
-    {
-        
-    }
-
 
     public void UpdateDiamondsCollected(bool addDiamond)
     {
@@ -63,11 +49,6 @@ public class UIManagerDiamonds : MonoBehaviour
     {
         hearts = GameManagerDiamonds.Instance.livesLost;
         RemoveHearts();
-    }
-
-    public void ShowGameOverWindow()
-    {
-        //gameOverWindow.SetActive(true);
     }
 
     private void SetDiamonds(bool addDiamond)
@@ -84,7 +65,6 @@ public class UIManagerDiamonds : MonoBehaviour
                     break;
                 case 3:
                     D3.GetComponent<ColorRenderer>().ActiveColor();
-                    // FER "YOU WIN" o algo aixi
                     break;
             }
         }
@@ -118,7 +98,6 @@ public class UIManagerDiamonds : MonoBehaviour
                 break;
             case 3:
                 H3.GetComponent<ColorRenderer>().InactiveColor();
-                // FER "YOU LOSE" o algo aixi
                 break;
 
         }

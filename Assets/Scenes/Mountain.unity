@@ -1050,7 +1050,7 @@ MonoBehaviour:
   fadeTextSpeed: 0.01
   fadeOutSpeed: 0.01
   timerText: {fileID: 795624578}
-  minutesLeft: 3
+  minutesLeft: 2
   fallingSpeed: 450
   gameOverText: {fileID: 323149298}
 --- !u!82 &664143516

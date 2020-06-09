@@ -11,7 +11,6 @@ public class ColorRenderer : MonoBehaviour
     void Start()
     {
         normalColor = gameObject.GetComponent<MeshRenderer>().material.color;
-        //grayColor = new Color(50, 200, 150);
     }
 
     public void InactiveColor()
