@@ -4,7 +4,7 @@ __________________________
 ## Brief introduction
 This project is developed by unity. The project in this repository is ready to build. The only pre-requirements are to have unity installed and have PoseNet (below) running while running the game.
 
-The game itself is self-explanatory, for more details you can see the presentation [here].
+The game itself is self-explanatory, for more details you can see the presentation ande demo videos [here].
 _______________________________
 This project uses the following software:
 ## PoseNetOSC-Unity
